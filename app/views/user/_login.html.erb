@@ -1,0 +1,11 @@
+<h4>Sign-in Or Create Account</h4>
+<% form_for :user, {:url => login_path} do |f| %>
+  <div class="row">
+      <span><%= f.label :username, 'Username' %></span> <%= f.text_field :username, :size => 25 %>
+  </div>
+  <div class="row">
+      <span><%= f.label :password, 'Password' %></span><%= f.password_field :password, :size => 25 %>
+  </div>
+  <div class="row"><%= submit_tag 'Sign In', :class => 'submit' %></div>
+  <div class="error"><%= flash[:notice] %></div>
+<% end %>

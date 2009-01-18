@@ -1,0 +1,40 @@
+<div id="review_presentations">
+    <div id="your_presentations">
+        <% if user_has_presentations? %>
+          <h3>Your Presentations</h3>
+          <% unless @user.failed_presentations.empty? %>
+            <h5>Failed to Upload: </h5>
+          <% end %>
+          <% @user.failed_presentations.each do |presentation| %>
+            <div><%= presentation.title %></div>
+          <% end %>
+          <% unless @user.pending_presentations.empty? %>
+            <h5>Upload in progress: </h5>
+          <% end %>
+          <% @user.pending_presentations.each do |presentation| %>
+            <div><%= presentation.title %></div>
+          <% end %>
+          <% unless @user.uploaded_presentations.empty? %>
+            <h5>Uploaded Presentations: </h5>
+          <% end %>
+          <table id="user_presentation" border="1">
+              <% @user.uploaded_presentations.each do |presentation| %>
+                <tr>
+                    <td><%= link_to (image_tag presentation.thumbnail || "", :alt => presentation.title, :height => 80, :width => 80), "/user/presentation/#{presentation.id}" %></td>
+                    <td><%= link_to(presentation.title, "/user/presentation/#{presentation.id}") %></td>
+                </tr>
+              <% end %>
+          </table>
+        <% end %>
+    </div>
+    <div id="other_presentations" style='<%= user_has_presentations? ? "float:left;margin-left: 180px;" : "margin-left: 280px;"%>'>
+        <% unless @other_presentations.blank? %>
+          <h3>All Presentations</h3>
+          <table id="other_presentation" border="1">
+              <% @other_presentations.each do |presentation| %>
+                <tr><%= render :partial => 'presentation', :locals => {:presentation => presentation} %></tr>
+              <% end %>
+          </table>
+        <% end %>
+    </div>
+</div>

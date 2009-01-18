@@ -1,0 +1,32 @@
+<div id="average_rating">
+    <span>Average Rating :</span>
+    <% (1..10).each do |i| %>
+      <input class="avg-star {split:2}" type="radio" name="test-1-rating-6" value='<%= (i/2.0) %>' disabled="disabled" <%= @presentation_rating_average >= (i/2.0) ?  "checked='checked'": "" %>/>
+    <% end %>
+    <script type="text/javascript">
+        $(function() {
+          $('.avg-star').rating({split: 2});
+        });
+    </script>
+</div>
+<% unless @user_rating.blank? %>
+  <div id="rating">
+      <form id="form3A" action="/user/rate_presentation">
+          <script type="text/javascript">
+              $(function() {
+                $('.auto-submit-star').rating({
+                  callback: function(value, link) {
+
+                    $(this.form).ajaxSubmit({target: '#rate'});
+                  }
+                });
+              });
+          </script>
+          <%= hidden_field_tag 'presentation', @presentation.id %>
+          <div>Your Rating :</div>
+          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :body_language} %>
+          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :voice} %>
+          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :message} %>
+      </form>
+  </div>
+<% end %>

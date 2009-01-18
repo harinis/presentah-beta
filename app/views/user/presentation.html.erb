@@ -1,0 +1,24 @@
+<div id="presentation">
+    <%= @viddler_video.embed_code(:player_type => 'player', :width => 400, :height => 400, :autoplay => 't') %>
+    <div id="description">
+        <div><span>Title : </span><%= @presentation.title %></div>
+        <div><span>Description : </span><%= @presentation.description %></div>
+        <% unless @presentation.purpose.blank? %>
+          <div><span>Purpose : </span><%= @presentation.purpose %></div>
+        <% end %>
+    </div>
+</div>
+
+<div id="rate"><%= render :partial => 'rating' %></div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_identifier = "<%= @presentation.id%>";
+    var disqus_title = "<%= @presentation.title%>";
+    var disqus_url = "<%= "http://presentah.disqus.com/#{@presentation.title}/"%>";
+    var disqus_developer = 1;
+</script>
+
+<script type="text/javascript" src="http://disqus.com/forums/presentah/embed.js"></script>
+<noscript><a href="http://presentah.disqus.com/?url=ref">View the discussion thread.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+

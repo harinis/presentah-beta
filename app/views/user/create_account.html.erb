@@ -1,0 +1,36 @@
+<div id='create_account' class="input_form">
+    <% form_for :user, @user, {:url => create_account_path} do |f| %>
+
+      <div id="labels">
+          <div class="row">
+              <span><%= f.label :username, 'Email' %></span>
+          </div>
+          <div class="row">
+              <span><%= f.label :password, 'Password' %></span>
+          </div>
+          <div class="row">
+              <span><%= f.label :password_confirmation, 'Password Confirmation' %></span>
+          </div>
+      </div>
+      <div id="inputs">
+          <div class="row">
+              <%= f.text_field :username %>
+              <span><%= f.error_message_on('username') %></span>
+          </div>
+          <div class="clearFloat"></div>
+
+          <div class="row">
+              <%= f.password_field :password %>
+              <span><%= f.error_message_on('password') %></span>
+          </div>
+          <div class="clearFloat"></div>
+
+          <div class="row">
+              <%= f.password_field :password_confirmation %>
+              <span><%= f.error_message_on(:password_confirmation) %></span>
+          </div>
+      </div>
+      <div class="clearFloat"></div>
+      <%= submit_tag "Create my Account", :class => 'form_submit' %>
+    <% end %>
+</div>

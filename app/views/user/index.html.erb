@@ -1,0 +1,26 @@
+<div id="left_panel">
+    <div id='sign_in'>
+        <%= render :partial => 'login' %>
+    </div>
+</div>
+<div id="create_or_how_to">
+    <%= link_to "How it Works", '#' %> | <%= link_to "Create Account", create_account_path %>
+</div>
+<div id="post_or_review">
+    <div><%= link_to 'Post Presentations', post_presentation_path %></div>
+    <div><%= link_to 'Review Presentations', '/user/review_presentations' %></div>
+</div>
+
+<% if @top_presentations %>
+  <div id="top_presentations">
+      <span>Top Presentations</span>
+      <table>
+          <tr>
+              <% @top_presentations.each do |presentation| %>
+                <td><%= link_to (image_tag presentation.thumbnail || "", :alt => presentation.title, :height => 160, :width => 160), "/user/presentation/#{presentation.id}" %></td>
+              <% end %>
+          </tr>
+      </table>
+  </div>
+<% end %>
+

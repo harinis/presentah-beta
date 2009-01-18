@@ -1,0 +1,33 @@
+<head>
+    <title>Presentah</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="Presentah - sharing presentations"/>
+   
+    <link rel="Stylesheet" href="/stylesheets/home.css" type="text/css" media="screen"/>
+    <link rel="Stylesheet" href="/stylesheets/jquery.rating.css" type="text/css" media="screen"/>
+
+    <script src="/javascripts/jquery-1.2.6.min.js" type="text/javascript"></script>
+    <script src="/javascripts/jquery.form.js" type="text/javascript"></script>
+    <script src="/javascripts/jquery.rating.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="heading"><span>Presentah</span></div>
+<span id="page_name"><%= @page_name || controller.action_name.titleize %></span>
+<span id="sign_up_link"><%= link_to("Sign In", '/user/sign_in') unless session[:user]%></span>
+<div class="clearFloat"></div>
+<div class="underline"></div>
+<div id="page_content">
+    <%= yield %>
+    <div class="push"></div>
+</div>
+<div id="footer">
+    <div class="underline"></div>
+    <%= link_to 'Home', '/' %>
+    <%= link_to "Create Account", create_account_path %>
+    <%= link_to 'Post Presentations', post_presentation_path %>
+    <%= link_to 'Review Presentations', '/user/review_presentations' %>
+</div>
+</body>
+
+
+

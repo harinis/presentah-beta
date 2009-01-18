@@ -1,0 +1,259 @@
+body {
+  background-color: honeydew;
+  font-family: sans-serif;
+}
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#heading {
+  float: left;
+  width: 45%;
+}
+
+.underline {
+  background-color: black;
+  width: 100%;
+  height: 1px;
+}
+
+#page_content {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+#page_name {
+  float: left;
+  width: 35%;
+}
+
+.clearFloat {
+  clear: both;
+}
+
+#heading, #page_name {
+  font-size: 16px;
+  color: darkblue;
+  font-weight: bold;
+  margin: 10px;
+}
+
+label, span {
+  font-family: sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  color: #666;
+}
+
+#sign_in {
+  background: url( '/images/panel.png' ) no-repeat;
+  width: 400px;
+  height: 300px;
+  margin-left: 160px;
+  padding-top: 50px;
+  text-align: center;
+}
+
+#sign_in .row input {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#dsq-recentcomments {
+  float: left;
+}
+
+#left_panel {
+  float: left;
+}
+
+#create_or_how_to {
+  float: left;
+  margin: 40px 0px 0px 140px;
+  height: 8%;
+}
+
+#post_or_review {
+  float: left;
+  width: 50%;  
+}
+
+#post_or_review div {
+  margin-left: 120px;
+  padding-top: 33px;
+  padding-left: 44px;
+  background: url( '/images/post_or_review.png' ) no-repeat;
+  height: 100px;
+  width: 280px;
+}
+
+#top_presentations {
+  float: left;
+  margin-left: 130px;
+}
+
+#top_presentations table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#top_presentations td {
+  margin-left: 80px;
+  width: 220px;
+}
+
+#post_or_review a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.input_form #inputs {
+  float: left;
+  text-align: left;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.input_form #labels {
+  text-align: right;
+  float: left;
+  width: 30%;
+  margin-top: 50px;
+}
+
+.input_form #inputs .row {
+  margin-top: 30px;
+}
+
+.form_submit {
+  margin-top: 30px;
+}
+
+.input_form #labels .row {
+  margin-top: 33px;
+}
+
+#post_presentation #labels .text_area_row {
+  margin-top: 94px;
+}
+
+#create_account #inputs, #create_account #labels {
+  margin-left: 100px;
+}
+
+#post_presentation, #create_account {
+  text-align: center;
+}
+
+div.row .formError {
+  margin-left: 10px;
+  color: red;
+  float: left;
+}
+
+div.error {
+  margin-top: 5px;
+  color: red;
+}
+
+#inputs div.row .fieldWithErrors {
+  float: left;
+}
+
+#presentation_video {
+  float: left;
+}
+
+#upload_video {
+  float: left;
+  margin-left: 10px;
+}
+
+#footer, .push {
+  height: 2em;
+}
+
+#footer {
+  text-align: right;
+}
+
+#footer a {
+  margin-right: 20px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: darkblue;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#sign_in_page {
+  text-align: center;
+}
+
+#sign_in_page {
+  background: url( '/images/panel.png' ) no-repeat;
+  width: 400px;
+  height: 450px;
+  margin-left: 500px;
+  padding-top: 50px;
+  margin-top: 150px;
+  text-align: center;
+}
+
+#sign_in_page .row input {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#review_presentations, #review_presentations * {
+  margin: 20px 0 10px 20px;
+}
+
+#review_presentations table * {
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: small;
+}
+
+#presentation {
+  width: 500px;
+  float: left;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#dsq-content {
+  float: left;
+  width: 600px;
+  margin-top: 40px;
+}
+
+a.dsq-brlink {
+  margin-right: 20px;
+  float: right;
+  font-size: 70% !important;
+}
+
+#average_rating {
+  width: 50%;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+#presentation div {
+  width: 500px;
+  float: left;
+  margin: 5px;
+}
+
+#your_presentations {
+  float: left;
+}

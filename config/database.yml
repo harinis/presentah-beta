@@ -1,0 +1,22 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  database: presentah
+  username: root
+  password: pwd
+  host: localhost
+
+test:
+  adapter: mysql
+  encoding: utf8
+  database: presentah_test
+  username: root
+  password: pwd
+  host: localhost
+
+staging:
+  development
+
+production:
+  development
+

@@ -1,0 +1,32 @@
+<div id='post_presentation' class="input_form">
+    <%= form_tag post_presentation_path, :id => 'post_presentation_form', :multipart => true %>
+
+    <div id="labels">
+        <div class="row"><%= label_tag :presentation_video, 'Presentation' %></div>
+        <div class="row"><%= label_tag :title, 'Title' %></div>
+        <div class="row"><%= label_tag :description, 'Description' %></div>
+        <div class="text_area_row"><%= label_tag :purpose, 'Purpose' %></div>
+        <div class="text_area_row"><%= label_tag :tags, 'Tags(space separated)' %></div>
+    </div>
+    <div id="inputs">
+        <div class="row">
+            <%= file_field_tag :presentation_video, :id => "presentation_video", :size => 50 %>
+        </div>
+        <div class="clearFloat"></div>
+        <div class="row">
+            <%= text_field_tag :title, "", {:size => 50} %>
+        </div>
+        <div class="row">
+            <%= text_area_tag :description, "", {:size => "50x4"} %>
+        </div>
+        <div class="row">
+            <%= text_area_tag :purpose, "", {:size => "50x4"} %>
+        </div>
+        <div class="row">
+            <%= text_field_tag :tags, "", {:size => 50} %>
+        </div>
+    </div>
+    <div class="clearFloat"></div>
+    <div class="row"><%= submit_tag (@user.nil? ? 'Sign In and Submit' : 'Submit'), :class => 'form_submit', :id => 'submit_presentation' %></div>
+    <span id="upload_info"><%= flash[:notice] %></span>    
+</div>
