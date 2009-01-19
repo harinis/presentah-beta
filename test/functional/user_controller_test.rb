@@ -123,6 +123,7 @@ class UserControllerTest < ActionController::TestCase
     assert_template('post_presentation')
     assert_equal 0, Presentation.count
     assert_equal "Presentation and Title are mandatory", flash[:notice]
+    assert_nil(flash[:show_loading_image])
   end
 
   def test_post_presentation_valid_params_and_user_not_signed_in
@@ -148,7 +149,7 @@ class UserControllerTest < ActionController::TestCase
 
     get :review_presentations
     assert_equal([college_presentation, business_presentation], assigns['other_presentations'])
-    end
+  end
 
   def test_review_presentations_with_user_not_signed_in
     user = create_a_user
@@ -174,30 +175,20 @@ class UserControllerTest < ActionController::TestCase
     get :presentation, :id => presentation.id
   end
 
-  def test_rating_presentation_for_body_language
-    user = create_a_user
-    @request.session[:user] = user
-    presentation = Presentation.create(:title => "School", :user_id => user.id, :status => 'completed')
+  [:body_language, :voice, :message, :slides].each do |criteria|
+    define_method "test_rating_presentation_for_#{criteria}".to_sym do
+      user = create_a_user
+      @request.session[:user] = user
+      presentation = Presentation.create(:title => "School", :user_id => user.id, :status => 'completed')
 
-    post :rate_presentation, :presentation => presentation.id, :rating_value_body_language => 4
-    presentation.reload
-    assert_equal 4, presentation.ratings.first.rating_for_body_language
-    assert_equal 4, presentation.average_rating_for_body_language
-    assert_equal assigns['user_rating'][:body_language], 4
-    assert_equal assigns['presentation_rating_average'], 4
+      post :rate_presentation, :presentation => presentation.id, "rating_value_#{criteria.to_s}".to_sym => 4
+      presentation.reload
+      assert_equal 4, presentation.ratings.first.send("rating_for_#{criteria}")
+      assert_equal 4, presentation.send("average_rating_for_#{criteria}")
+      assert_equal 4, assigns['user_rating'][criteria]
+      assert_equal 4, assigns['presentation'].send("average_rating_for_#{criteria}")
+      assert_equal 1, assigns['user_rating'][:overall]
     end
-
-  def test_rating_presentation_for_voice
-    user = create_a_user
-    @request.session[:user] = user
-    presentation = Presentation.create(:title => "School", :user_id => user.id, :status => 'completed')
-
-    post :rate_presentation, :presentation => presentation.id, :rating_value_voice => 4
-    presentation.reload
-    assert_equal 4, presentation.ratings.first.rating_for_voice
-    assert_equal 4, presentation.average_rating_for_voice
-    assert_equal 4, assigns['user_rating'][:voice]
-    assert_equal 4, assigns['presentation_rating_average']
   end
 
   def test_user_updating_his_presentation
@@ -225,7 +216,7 @@ class UserControllerTest < ActionController::TestCase
     assert_equal 2, Rating.find_by_user_id_and_presentation_id(user.id, presentation.id).rating_for_body_language
     assert_equal 3, presentation.average_rating_for_body_language
     assert_equal assigns['user_rating'][:body_language], 2
-    assert_equal assigns['presentation_rating_average'], 3
+    assert_equal assigns['presentation'].average_rating_for_body_language, 3
   end
 
 

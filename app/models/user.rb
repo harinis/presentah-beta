@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
 
   def rating_for(presentation, criteria)
     user_rating = Rating.find_by_user_id_and_presentation_id(self.id, presentation.id)
-    return 0 if user_rating.nil?
-    rating = user_rating.send("rating_for_#{criteria.to_s}")
-    rating.nil? ? 0 : rating
+    user_rating.nil? ? 0 : user_rating.send("rating_for_#{criteria.to_s}")
   end
 end

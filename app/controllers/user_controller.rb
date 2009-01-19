@@ -54,12 +54,12 @@ class UserController < ApplicationController
     rescue Viddler::ResponseError
       @viddler_video = @viddler.find_video_by_url(@presentation.viddler_url)
     end
-    load_ratings
+    load_ratings if session[:user]
   end
 
   def rate_presentation
     @presentation = Presentation.find_by_id(params[:presentation])
-    [:body_language, :voice, :message].each do|criteria|
+    Presentation::CRITERIA.each do|criteria|
       rating_value = params["rating_value_#{criteria}"]
       @presentation.rate(rating_value, criteria, session[:user]) unless rating_value.blank?
     end
@@ -85,10 +85,12 @@ class UserController < ApplicationController
 
   def load_ratings
     @user_rating = {}
-    [:body_language, :voice, :message].each do|criteria|
-      @user_rating[criteria] = session[:user].rating_for(@presentation, criteria) if session[:user]
+    overall = 0
+    Presentation::CRITERIA.each do|criteria|
+      @user_rating[criteria] = session[:user].rating_for(@presentation, criteria)
+      overall += @user_rating[criteria]
     end
-    @presentation_rating_average = @presentation.average_rating_for_body_language.nil? ? 0 : @presentation.average_rating_for_body_language
+    @user_rating[:overall] = overall/4
   end
 
 end

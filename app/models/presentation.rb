@@ -1,6 +1,7 @@
 class Presentation < ActiveRecord::Base
   belongs_to :user
   has_many :ratings
+  CRITERIA = [:body_language, :voice, :message, :slides]
 
   def rate(value, criteria, user)
     rating = Rating.find_or_initialize_by_user_id_and_presentation_id(user.id, self.id)

@@ -1,16 +1,15 @@
-<div id="average_rating">
-    <span>Average Rating :</span>
-    <% (1..10).each do |i| %>
-      <input class="avg-star {split:2}" type="radio" name="test-1-rating-6" value='<%= (i/2.0) %>' disabled="disabled" <%= @presentation_rating_average >= (i/2.0) ?  "checked='checked'": "" %>/>
-    <% end %>
-    <script type="text/javascript">
-        $(function() {
-          $('.avg-star').rating({split: 2});
-        });
-    </script>
-</div>
-<% unless @user_rating.blank? %>
-  <div id="rating">
+<div id="rating">
+    <% unless @user_rating.blank? %>
+
+      <span>Overall Rating :</span>
+      <% (1..10).each do |i| %>
+        <input class="avg-star {split:2}" type="radio" name="test-1-rating-6" value='<%= (i/2.0) %>' disabled="disabled" <%= @user_rating[:overall] >= (i/2.0) ?  "checked='checked'": "" %>/>
+      <% end %>
+      <script type="text/javascript">
+          $(function() {
+            $('.avg-star').rating({split: 2});
+          });
+      </script>
       <form id="form3A" action="/user/rate_presentation">
           <script type="text/javascript">
               $(function() {
@@ -23,10 +22,17 @@
               });
           </script>
           <%= hidden_field_tag 'presentation', @presentation.id %>
-          <div>Your Rating :</div>
+
           <%= render :partial => "rating_for_criteria", :locals => {:criteria => :body_language} %>
           <%= render :partial => "rating_for_criteria", :locals => {:criteria => :voice} %>
           <%= render :partial => "rating_for_criteria", :locals => {:criteria => :message} %>
+          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :slides} %>
       </form>
-  </div>
-<% end %>
+    <% end %>
+</div>
+<div id="average_rating">
+    <div><%= @presentation.average_rating_for_body_language %></div>
+    <div><%= @presentation.average_rating_for_voice %></div>
+    <div><%= @presentation.average_rating_for_message %></div>
+    <div><%= @presentation.average_rating_for_slides %></div>
+</div>
