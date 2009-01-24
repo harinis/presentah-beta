@@ -1,8 +1,11 @@
-<div>
-    <span><%= criteria.to_s.titleize %></span>
-    <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s%>" value="1" <%= @user_rating[criteria] >=1 ?  "checked='checked'": "" %>/>
-    <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s%>" value="2" <%= @user_rating[criteria] >=2 ?  "checked='checked'": "" %>/>
-    <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s%>" value="3" <%= @user_rating[criteria] >=3 ?  "checked='checked'": "" %>/>
-    <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s%>" value="4" <%= @user_rating[criteria] >=4 ?  "checked='checked'": "" %>/>
-    <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s%>" value="5" <%= @user_rating[criteria] >=5 ?  "checked='checked'": "" %>/>
-</div>
+<tr>
+    <td class="criteria"><span><%= criteria.to_s.titleize %> : </span></td>
+    <td  class="rating_for_criteria">
+        <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s %>" value="1" <%= @user_rating[criteria] >=1 ?  "checked='checked'": "" %>/>
+        <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s %>" value="2" <%= @user_rating[criteria] >=2 ?  "checked='checked'": "" %>/>
+        <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s %>" value="3" <%= @user_rating[criteria] >=3 ?  "checked='checked'": "" %>/>
+        <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s %>" value="4" <%= @user_rating[criteria] >=4 ?  "checked='checked'": "" %>/>
+        <input class="auto-submit-star" type="radio" name="rating_value_<%= criteria.to_s %>" value="5" <%= @user_rating[criteria] >=5 ?  "checked='checked'": "" %>/>
+    </td>
+    <td class="average_rating"><%= @presentation.send("average_rating_for_#{criteria.to_s}") %></td>
+</tr>

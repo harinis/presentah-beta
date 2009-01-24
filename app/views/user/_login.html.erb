@@ -1,4 +1,4 @@
-<h4>Sign-in Or Create Account</h4>
+<h4>Sign-in | <%= link_to "Create Account", create_account_path %></h4>
 <% form_for :user, {:url => login_path} do |f| %>
   <div class="row">
       <span><%= f.label :username, 'Username' %></span> <%= f.text_field :username, :size => 25 %>
@@ -6,6 +6,11 @@
   <div class="row">
       <span><%= f.label :password, 'Password' %></span><%= f.password_field :password, :size => 25 %>
   </div>
-  <div class="row"><%= submit_tag 'Sign In', :class => 'submit' %></div>
+  <div class="row remember_password">
+      <%= check_box_tag "remember" %><span>Remember Password</span><%= submit_tag 'Sign In', :class => 'submit' %>
+  </div>
+  <div class="row">
+      <%= link_to "Forgot Password?", "/user/forgot_password" %>
+  </div>
   <div class="error"><%= flash[:notice] %></div>
 <% end %>

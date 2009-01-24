@@ -242,12 +242,6 @@ a.dsq-brlink {
   font-size: 70% !important;
 }
 
-#average_rating {
-  width: 50%;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
-
 #presentation div {
   width: 500px;
   float: left;
@@ -260,4 +254,19 @@ a.dsq-brlink {
 
 #loading{
   margin-top: 20px;
+}
+
+.rating_for_criteria{
+  width:40%;
+}
+.average_rating{
+  width: 19%;
+  text-align:right;
+}
+.criteria {
+  width: 40%;
+}
+.remember_password{
+  font-size: small;
+  margin-top: 4px;
 }

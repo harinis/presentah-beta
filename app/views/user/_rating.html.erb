@@ -1,15 +1,19 @@
 <div id="rating">
     <% unless @user_rating.blank? %>
-
-      <span>Overall Rating :</span>
-      <% (1..10).each do |i| %>
-        <input class="avg-star {split:2}" type="radio" name="test-1-rating-6" value='<%= (i/2.0) %>' disabled="disabled" <%= @user_rating[:overall] >= (i/2.0) ?  "checked='checked'": "" %>/>
-      <% end %>
-      <script type="text/javascript">
-          $(function() {
-            $('.avg-star').rating({split: 2});
-          });
-      </script>
+      <table>
+          <td><span>Overall Rating:</span></td>
+          <td class="rating_for_criteria">
+              <% (1..10).each do |i| %>
+                <input class="avg-star {split:2}" type="radio" name="test-1-rating-6" value='<%= (i/2.0) %>' disabled="disabled" <%= @user_rating[:overall] >= (i/2.0) ?  "checked='checked'": "" %>/>
+              <% end %>
+          </td>
+          <script type="text/javascript">
+              $(function() {
+                $('.avg-star').rating({split: 2});
+              });
+          </script>
+          <td class="average_rating"><span>Average</span></td>
+      </table>
       <form id="form3A" action="/user/rate_presentation">
           <script type="text/javascript">
               $(function() {
@@ -22,17 +26,12 @@
               });
           </script>
           <%= hidden_field_tag 'presentation', @presentation.id %>
-
-          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :body_language} %>
-          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :voice} %>
-          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :message} %>
-          <%= render :partial => "rating_for_criteria", :locals => {:criteria => :slides} %>
+          <table>
+              <%= render :partial => "rating_for_criteria", :locals => {:criteria => :body_language} %>
+              <%= render :partial => "rating_for_criteria", :locals => {:criteria => :voice} %>
+              <%= render :partial => "rating_for_criteria", :locals => {:criteria => :message} %>
+              <%= render :partial => "rating_for_criteria", :locals => {:criteria => :slides} %>
+          </table>
       </form>
     <% end %>
-</div>
-<div id="average_rating">
-    <div><%= @presentation.average_rating_for_body_language %></div>
-    <div><%= @presentation.average_rating_for_voice %></div>
-    <div><%= @presentation.average_rating_for_message %></div>
-    <div><%= @presentation.average_rating_for_slides %></div>
 </div>
