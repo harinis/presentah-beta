@@ -219,6 +219,16 @@ class UserControllerTest < ActionController::TestCase
     assert_equal assigns['presentation'].average_rating_for_body_language, 3
   end
 
+  def test_forgot_password
+    user = create_a_user
+    @request.session[:user] = user
+
+    Mailer.expects(:deliver_forgot_password).with(user.username, user.password)
+    post :forgot_password, :email => user.username
+    assert_equal "An email has been sent to #{user.username} with your password!", flash[:notice]
+    assert_redirected_to :action => "sign_in"
+  end
+
 
   private
 

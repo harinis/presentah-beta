@@ -28,22 +28,24 @@ ActiveRecord::Schema.define(:version => 20090102170708) do
     t.integer  "average_rating_for_body_language", :limit => 11
     t.integer  "average_rating_for_voice",         :limit => 11
     t.integer  "average_rating_for_message",       :limit => 11
+    t.integer  "average_rating_for_slides",        :limit => 11
   end
 
   create_table "ratings", :force => true do |t|
-    t.integer  "user_id",                  :limit => 11, :null => false
-    t.integer  "presentation_id",          :limit => 11, :null => false
-    t.integer  "rating_for_body_language", :limit => 11
-    t.integer  "rating_for_voice",         :limit => 11
-    t.integer  "rating_for_message",       :limit => 11
+    t.integer  "user_id",                  :limit => 11,                :null => false
+    t.integer  "presentation_id",          :limit => 11,                :null => false
+    t.integer  "rating_for_body_language", :limit => 11, :default => 0
+    t.integer  "rating_for_voice",         :limit => 11, :default => 0
+    t.integer  "rating_for_message",       :limit => 11, :default => 0
+    t.integer  "rating_for_slides",        :limit => 11, :default => 0
     t.string   "criteria"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",   :default => "", :null => false
-    t.string   "password",   :default => "", :null => false
+    t.string   "username"
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -67,6 +67,13 @@ class UserController < ApplicationController
     render :partial => 'rating'
   end
 
+  def forgot_password
+    user = User.find_by_username(params[:email])
+    Mailer.deliver_forgot_password(user.username, user.password)
+    flash[:notice] = "An email has been sent to #{user.username} with your password!"
+    redirect_to :action => 'sign_in'     
+  end
+
   private
 
   def get_viddler_instance

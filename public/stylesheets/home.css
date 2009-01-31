@@ -266,7 +266,7 @@ a.dsq-brlink {
 .criteria {
   width: 40%;
 }
-.remember_password{
+.remember_password span{
   font-size: small;
-  margin-top: 4px;
+  padding: 4px 0px 0px 4px;
 }
