@@ -171,10 +171,10 @@ class UserControllerTest < ActionController::TestCase
 
       post :rate_presentation, :presentation => presentation.id, "rating_value_#{criteria.to_s}".to_sym => 4
       presentation.reload
-      assert_equal 4, presentation.ratings.first.send("rating_for_#{criteria}")
-      assert_equal 4, presentation.send("average_rating_for_#{criteria}")
+      assert_equal 4, presentation.ratings.first.send("#{criteria}_rating")
+      assert_equal 4, presentation.send("average_#{criteria}_rating")
       assert_equal 4, assigns['user_rating'][criteria]
-      assert_equal 4, assigns['presentation'].send("average_rating_for_#{criteria}")
+      assert_equal 4, assigns['presentation'].send("average_#{criteria}_rating")
     end
   end
 
@@ -183,7 +183,7 @@ class UserControllerTest < ActionController::TestCase
     @request.session[:user] = user
     presentation = Presentation.create(:title => "School", :user_id => user.id, :status => 'completed')
 
-    post :rate_presentation, :presentation => presentation.id, :overall_rating => 4
+    post :rate_presentation, :presentation => presentation.id, :rating_value_overall => 4
     presentation.reload
     assert_equal 4, presentation.ratings.first.overall_rating
     assert_equal 4, presentation.average_overall_rating
@@ -199,8 +199,8 @@ class UserControllerTest < ActionController::TestCase
 
     post :rate_presentation, :presentation => presentation.id, :rating_value_body_language => 2
     presentation.reload
-    assert_equal 2, presentation.ratings.first.rating_for_body_language
-    assert_equal 2, presentation.average_rating_for_body_language
+    assert_equal 2, presentation.ratings.first.body_language_rating
+    assert_equal 2, presentation.average_body_language_rating
   end
 
   def test_average_rating_per_presentation
@@ -213,10 +213,10 @@ class UserControllerTest < ActionController::TestCase
 
     post :rate_presentation, :presentation => presentation.id, :rating_value_body_language => 2
     presentation.reload
-    assert_equal 2, Rating.find_by_user_id_and_presentation_id(user.id, presentation.id).rating_for_body_language
-    assert_equal 3, presentation.average_rating_for_body_language
+    assert_equal 2, Rating.find_by_user_id_and_presentation_id(user.id, presentation.id).body_language_rating
+    assert_equal 3, presentation.average_body_language_rating
     assert_equal assigns['user_rating'][:body_language], 2
-    assert_equal assigns['presentation'].average_rating_for_body_language, 3
+    assert_equal assigns['presentation'].average_body_language_rating, 3
   end
 
   def test_forgot_password
@@ -227,6 +227,14 @@ class UserControllerTest < ActionController::TestCase
     post :forgot_password, :email => user.username
     assert_equal "An email has been sent to #{user.username} with your password!", flash[:notice]
     assert_redirected_to :action => "sign_in"
+  end
+
+  def test_sign_out
+    user = create_a_user
+    @request.session[:user] = user
+    get :sign_out
+    assert_nil @request.session[:user]
+    assert_redirected_to :action => :index
   end
 
   def test_search

@@ -14,18 +14,17 @@
 <div id="heading"><span>Presentah</span></div>
 <div id="header">
     <%= link_to 'Home', '/' %>
-    <%= link_to 'Review Presentations', '/user/review_presentations' %>
+    <%= link_to 'Channel', '/user/review_presentations' %>
     <%= link_to "My Presentah", '#' %>
     <%= link_to 'Upload', post_presentation_path %>
 </div>
 <span id="sign_up_link">
     <% if session[:user] %>
-    Hi <%= session[:user].username %>
+    <span>Hi <%= link_to(session[:user].username, '#') %> | <%= link_to("Sign Out", '/user/sign_out') %></span>
     <% else %>
     <%= link_to("Sign In", '/user/sign_in') %>
     <% end %>
-      </span> |
-<span>Help</span>
+</span>
 
 <div class="clearFloat"></div>
 <div class="underline"></div>

@@ -62,7 +62,6 @@ class UserController < ApplicationController
       rating_value = params["rating_value_#{criteria}"]
       @presentation.rate(rating_value, criteria, session[:user]) unless rating_value.blank?
     end
-     @presentation.rate(params[:overall_rating], nil, session[:user]) unless params[:overall_rating].blank?
     load_ratings
     render :partial => 'rating'
   end
@@ -71,11 +70,16 @@ class UserController < ApplicationController
     user = User.find_by_username(params[:email])
     Mailer.deliver_forgot_password(user.username, user.password)
     flash[:notice] = "An email has been sent to #{user.username} with your password!"
-    redirect_to :action => 'sign_in'     
+    redirect_to :action => 'sign_in'
   end
 
   def search
-    @results = Presentation.find(:all, :conditions => ['average_overall_rating > 0'], :order => 'average_overall_rating DESC') 
+    @results = Presentation.find(:all, :conditions => ['average_overall_rating > 0'], :order => 'average_overall_rating DESC')
+  end
+
+  def sign_out
+    session[:user] = nil
+    redirect_to '/'
   end
 
   private
@@ -99,7 +103,6 @@ class UserController < ApplicationController
     Presentation::CRITERIA.each do|criteria|
       @user_rating[criteria] = session[:user].rating_for(@presentation, criteria)
     end
-#    @user_rating[:overall] = overall/4
   end
 
 end
