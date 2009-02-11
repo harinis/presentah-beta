@@ -7,20 +7,8 @@ class UserControllerTest < ActionController::TestCase
 
   def test_user_index
     tom = create_a_user
-    school_presentation = Presentation.create(:title => "School", :user_id => tom.id)
-    college_presentation = Presentation.create(:title => "College", :user_id => tom.id)
-    business_presentation = Presentation.create(:title => "business", :user_id => tom.id)
-    another_business_presentation = Presentation.create(:title => "Another business", :user_id => tom.id)
-    another_college_presentation = Presentation.create(:title => "Another college", :user_id => tom.id)
-
-    school_presentation.rate(5, 'body_language', tom)
-    college_presentation.rate(2, 'body_language', tom)
-    business_presentation.rate(4, 'body_language', tom)
-    another_business_presentation.rate(3, 'body_language', tom)
-    another_college_presentation.rate(1, 'body_language', tom)
 
     get :index
-    assert_equal([school_presentation, business_presentation, another_business_presentation, college_presentation], assigns['top_presentations'])
     assert_equal "Home", assigns['page_name']
   end
 
@@ -77,7 +65,7 @@ class UserControllerTest < ActionController::TestCase
   end
 
   def test_post_presentation_page
-    user = mock
+    user = mock(:username => "tom")
     @request.session[:user] = user
     get :post_presentation
     assert_equal(user, assigns['user'])
@@ -187,8 +175,20 @@ class UserControllerTest < ActionController::TestCase
       assert_equal 4, presentation.send("average_rating_for_#{criteria}")
       assert_equal 4, assigns['user_rating'][criteria]
       assert_equal 4, assigns['presentation'].send("average_rating_for_#{criteria}")
-      assert_equal 1, assigns['user_rating'][:overall]
     end
+  end
+
+  def test_rating_overall_for_a_presentation
+    user = create_a_user
+    @request.session[:user] = user
+    presentation = Presentation.create(:title => "School", :user_id => user.id, :status => 'completed')
+
+    post :rate_presentation, :presentation => presentation.id, :overall_rating => 4
+    presentation.reload
+    assert_equal 4, presentation.ratings.first.overall_rating
+    assert_equal 4, presentation.average_overall_rating
+    assert_equal 4, assigns['user_rating'][:overall]
+    assert_equal 4, assigns['presentation'].average_overall_rating
   end
 
   def test_user_updating_his_presentation
@@ -229,6 +229,24 @@ class UserControllerTest < ActionController::TestCase
     assert_redirected_to :action => "sign_in"
   end
 
+  def test_search
+    tom = create_a_user
+    @request.session[:user] = tom
+    school_presentation = Presentation.create(:title => "School", :user_id => tom.id)
+    college_presentation = Presentation.create(:title => "College", :user_id => tom.id)
+    business_presentation = Presentation.create(:title => "business", :user_id => tom.id)
+    another_business_presentation = Presentation.create(:title => "Another business", :user_id => tom.id)
+    another_college_presentation = Presentation.create(:title => "Another college", :user_id => tom.id)
+
+    school_presentation.rate(5, 'body_language', tom)
+    college_presentation.rate(2, 'body_language', tom)
+    business_presentation.rate(4, 'body_language', tom)
+    another_business_presentation.rate(3, 'body_language', tom)
+    another_college_presentation.rate(1, 'body_language', tom)
+
+    get :search, :criteria => "popular"
+    assert_equal([school_presentation, business_presentation, another_business_presentation, college_presentation, another_college_presentation], assigns['results'])
+  end
 
   private
 

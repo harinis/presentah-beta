@@ -1,14 +1,14 @@
-<div id="create_or_how_to">
-    <%= link_to "How it Works", '#' %>
-</div>
-<div id="left_panel">
-    <div id='sign_in'>
-        <%= render :partial => 'login' %>
-    </div>
-</div>
 <div id="post_or_review">
-    <div><%= link_to 'Post Presentations', post_presentation_path %></div>
-    <div><%= link_to 'Review Presentations', '/user/review_presentations' %></div>
+    <div id="how_to">
+        <%= link_to "How it Works", '#' %>
+    </div>    
+    <div><%= link_to '1 Review your Presentation', '/user/review_presentations' %></div>
+    <div><%= link_to '2 Post your Presentation', post_presentation_path %></div>
+    <div><%= link_to '3 Invite Feedback', '#' %></div>
+    <div><%= link_to '4 Improve your Presentation', '#' %></div>
+</div>
+<div id='sign_in'>
+    <%= render :partial => 'login' %>
 </div>
 
 <% if @top_presentations %>

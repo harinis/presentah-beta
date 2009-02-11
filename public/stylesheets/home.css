@@ -56,8 +56,10 @@ label, span {
   width: 400px;
   height: 300px;
   margin-left: 160px;
+  margin-top: 65px;
   padding-top: 50px;
   text-align: center;
+  float: left;
 }
 
 #sign_in .row input {
@@ -67,30 +69,6 @@ label, span {
 
 #dsq-recentcomments {
   float: left;
-}
-
-#left_panel {
-  float: left;
-}
-
-#create_or_how_to {
-  float: left;
-  margin: 40px 0px 0px 140px;
-  height: 8%;
-}
-
-#post_or_review {
-  float: left;
-  width: 50%;  
-}
-
-#post_or_review div {
-  margin-left: 120px;
-  padding-top: 33px;
-  padding-left: 44px;
-  background: url( '/images/post_or_review.png' ) no-repeat;
-  height: 100px;
-  width: 280px;
 }
 
 #top_presentations {
@@ -108,10 +86,24 @@ label, span {
   width: 220px;
 }
 
+#post_or_review {
+  float: left;
+  margin: 80px 30px 0px 280px;
+}
+
+#post_or_review div {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
 #post_or_review a {
   text-decoration: none;
   color: black;
   font-weight: bold;
+}
+
+#how_to{
+  margin-left: 50px;
 }
 
 .input_form #inputs {
@@ -180,11 +172,11 @@ div.error {
   height: 2em;
 }
 
-#footer {
-  text-align: right;
+#header {
+  float: left;  
 }
 
-#footer a {
+#header a {
   margin-right: 20px;
   margin-top: 10px;
   font-size: 13px;
@@ -252,21 +244,24 @@ a.dsq-brlink {
   float: left;
 }
 
-#loading{
+#loading {
   margin-top: 20px;
 }
 
-.rating_for_criteria{
-  width:40%;
+.rating_for_criteria {
+  width: 40%;
 }
-.average_rating{
+
+.average_rating {
   width: 19%;
-  text-align:right;
+  text-align: right;
 }
+
 .criteria {
   width: 40%;
 }
-.remember_password span{
+
+.remember_password span {
   font-size: small;
   padding: 4px 0px 0px 4px;
 }

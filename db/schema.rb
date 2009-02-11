@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20090102170708) do
     t.integer  "average_rating_for_voice",         :limit => 11
     t.integer  "average_rating_for_message",       :limit => 11
     t.integer  "average_rating_for_slides",        :limit => 11
+    t.integer  "average_overall_rating",           :limit => 11
   end
 
   create_table "ratings", :force => true do |t|
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20090102170708) do
     t.integer  "rating_for_voice",         :limit => 11, :default => 0
     t.integer  "rating_for_message",       :limit => 11, :default => 0
     t.integer  "rating_for_slides",        :limit => 11, :default => 0
+    t.integer  "overall_rating",           :limit => 11, :default => 0
     t.string   "criteria"
     t.datetime "created_at"
     t.datetime "updated_at"

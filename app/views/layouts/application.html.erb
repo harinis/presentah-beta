@@ -2,7 +2,7 @@
     <title>Presentah</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content="Presentah - sharing presentations"/>
-   
+
     <link rel="Stylesheet" href="/stylesheets/home.css" type="text/css" media="screen"/>
     <link rel="Stylesheet" href="/stylesheets/jquery.rating.css" type="text/css" media="screen"/>
 
@@ -12,8 +12,21 @@
 </head>
 <body>
 <div id="heading"><span>Presentah</span></div>
-<span id="page_name"><%= @page_name || controller.action_name.titleize %></span>
-<span id="sign_up_link"><%= link_to("Sign In", '/user/sign_in') unless session[:user]%></span>
+<div id="header">
+    <%= link_to 'Home', '/' %>
+    <%= link_to 'Review Presentations', '/user/review_presentations' %>
+    <%= link_to "My Presentah", '#' %>
+    <%= link_to 'Upload', post_presentation_path %>
+</div>
+<span id="sign_up_link">
+    <% if session[:user] %>
+    Hi <%= session[:user].username %>
+    <% else %>
+    <%= link_to("Sign In", '/user/sign_in') %>
+    <% end %>
+      </span> |
+<span>Help</span>
+
 <div class="clearFloat"></div>
 <div class="underline"></div>
 <div id="page_content">
@@ -22,10 +35,6 @@
 </div>
 <div id="footer">
     <div class="underline"></div>
-    <%= link_to 'Home', '/' %>
-    <%= link_to "Create Account", create_account_path %>
-    <%= link_to 'Post Presentations', post_presentation_path %>
-    <%= link_to 'Review Presentations', '/user/review_presentations' %>
 </div>
 </body>
 

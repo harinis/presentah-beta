@@ -2,7 +2,7 @@ class AddRatingTables < ActiveRecord::Migration
   def self.up
     create_table :ratings do |t|
       t.integer :user_id, :presentation_id, :null => false
-      t.integer :rating_for_body_language, :rating_for_voice, :rating_for_message, :rating_for_slides, :default => 0
+      t.integer :rating_for_body_language, :rating_for_voice, :rating_for_message, :rating_for_slides, :overa :default => 0
       t.string :criteria
       t.timestamps
     end
@@ -10,6 +10,7 @@ class AddRatingTables < ActiveRecord::Migration
     add_column :presentations, :average_rating_for_voice, :integer
     add_column :presentations, :average_rating_for_message, :integer
     add_column :presentations, :average_rating_for_slides, :integer
+    add_column :presentations, :average_overall_rating, :integer
   end
 
   def self.down
@@ -17,6 +18,7 @@ class AddRatingTables < ActiveRecord::Migration
     remove_column :presentations, :average_rating_for_voice
     remove_column :presentations, :average_rating_for_message
     remove_column :presentations, :average_rating_for_slides
+    remove_column :presentations, :average_overall_rating
 
     drop_table :ratings
   end

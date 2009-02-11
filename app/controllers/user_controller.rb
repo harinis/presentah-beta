@@ -2,7 +2,6 @@ class UserController < ApplicationController
   before_filter :get_viddler_instance, :only => [:presentation]
   def index
     @page_name = 'Home'
-    @top_presentations = Presentation.find(:all, :conditions => ['average_rating_for_body_language > 0'], :order => 'average_rating_for_body_language DESC', :limit => 4)
   end
 
   def create_account
@@ -63,6 +62,7 @@ class UserController < ApplicationController
       rating_value = params["rating_value_#{criteria}"]
       @presentation.rate(rating_value, criteria, session[:user]) unless rating_value.blank?
     end
+     @presentation.rate(params[:overall_rating], nil, session[:user]) unless params[:overall_rating].blank?
     load_ratings
     render :partial => 'rating'
   end
@@ -72,6 +72,10 @@ class UserController < ApplicationController
     Mailer.deliver_forgot_password(user.username, user.password)
     flash[:notice] = "An email has been sent to #{user.username} with your password!"
     redirect_to :action => 'sign_in'     
+  end
+
+  def search
+    @results = Presentation.find(:all, :conditions => ['average_overall_rating > 0'], :order => 'average_overall_rating DESC') 
   end
 
   private
@@ -92,12 +96,10 @@ class UserController < ApplicationController
 
   def load_ratings
     @user_rating = {}
-    overall = 0
     Presentation::CRITERIA.each do|criteria|
       @user_rating[criteria] = session[:user].rating_for(@presentation, criteria)
-      overall += @user_rating[criteria]
     end
-    @user_rating[:overall] = overall/4
+#    @user_rating[:overall] = overall/4
   end
 
 end
