@@ -5,6 +5,7 @@ development:
   username: root
   password: pwd
   host: localhost
+  socket: /var/run/mysqld/mysqld.sock
 
 test:
   adapter: mysql
@@ -13,10 +14,10 @@ test:
   username: root
   password: pwd
   host: localhost
+  socket: /var/run/mysqld/mysqld.sock
 
 staging:
   development
-
 production:
   development
 
