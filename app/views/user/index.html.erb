@@ -8,6 +8,7 @@
     <div><%= link_to '4 Improve your Presentation', '#' %></div>
 </div>
 <div id='sign_in'>
+    <%= flash[:access_denied] %>
     <%= render :partial => 'login' %>
 </div>
 

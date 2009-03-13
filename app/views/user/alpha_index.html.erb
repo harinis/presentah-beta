@@ -1,0 +1,93 @@
+<head>
+    <title>Presentah</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="Presentah - sharing presentations"/>
+
+    <link rel="Stylesheet" href="/stylesheets/alpha.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div id="heading"><span>Presentah</span></div>
+<div id="header">
+    <%= link_to 'Home', '#' %>
+    <%= link_to 'Channel', '#' %>
+    <%= link_to "My Presentah", '#' %>
+    <%= link_to 'Upload', '#' %>
+</div>
+
+<div class="clearFloat"></div>
+<div class="underline"></div>
+<div id="page_content">
+    <div id="how_it_works"><span>How it Works</span></div>
+    <div id="post_or_review">
+        <div class="roundedcornr_box_604811">
+            <div class="roundedcornr_top_143138">
+                <div></div>
+            </div>
+            <div class="roundedcornr_content_143138">
+                <div><%= link_to 'Record your Presentation', '#' %></div>
+            </div>
+            <div class="roundedcornr_bottom_143138">
+                <div></div>
+            </div>
+        </div>
+        <div class="roundedcornr_box_604811">
+            <div class="roundedcornr_top_143138">
+                <div></div>
+            </div>
+            <div class="roundedcornr_content_143138">
+                <div><%= link_to 'Post your Presentation', '#' %></div>
+            </div>
+            <div class="roundedcornr_bottom_143138">
+                <div></div>
+            </div>
+        </div>
+        <div class="roundedcornr_box_604811">
+            <div class="roundedcornr_top_143138">
+                <div></div>
+            </div>
+            <div class="roundedcornr_content_143138">
+                <div><%= link_to 'Invite Feedback', '#' %></div>
+            </div>
+            <div class="roundedcornr_bottom_143138">
+                <div></div>
+            </div>
+        </div>
+        <div class="roundedcornr_box_604811">
+            <div class="roundedcornr_top_143138">
+                <div></div>
+            </div>
+            <div class="roundedcornr_content_143138">
+                <div><%= link_to 'Improve your Presentation', '#' %></div>
+            </div>
+            <div class="roundedcornr_bottom_143138">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div id="sign_in">
+        <div class="roundedcornr_box_143138">
+            <div class="roundedcornr_top_143138">
+                <div></div>
+            </div>
+            <div class="roundedcornr_content_143138">
+                <h4>Register here to get notification when presentah alpha is released!</h4>
+                <% form_for :interested_user, @interested_user, {:url => '/user/alpha_index'} do |f| %>
+                    <div class="row">
+                        <span><%= f.label :email, 'Email' %></span> <%= f.text_field :email, :size => 25, :id => "email" %>
+                    </div>
+                    <%= submit_tag 'Sign Up', :class => 'submit' %>
+                    <div class="error"><span><%= f.error_message_on('email').blank? ? flash[:notice] : f.error_message_on('email')%></span></div>
+                <% end %>
+            </div>
+            <div class="roundedcornr_bottom_143138">
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="push"></div>
+</div>
+<div id="footer">
+    <div class="underline"></div>
+</div>
+</body>

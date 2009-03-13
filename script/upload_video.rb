@@ -19,21 +19,6 @@ begin
       :make_public => "0")
   RAILS_DEFAULT_LOGGER.info( "Video Uploaded Successfully: #{video.title}")
 
-#  viddler.update_video(
-#    video.id,
-#      :title => presentation.title,
-#      :description => presentation.description,
-#      :tags =>  presentation.tags,
-#      :view_perm => "private",
-#      :view_users => "",
-#      :view_use_secret => "0",
-#      :embed_perm => "private",
-#      :embed_users => "",
-#      :commenting_perm => "private",
-#      :tagging_perm => "private",
-#      :download_perm => "private",
-#      :download_users => "")
-#  RAILS_DEFAULT_LOGGER.info( "Video Description Updated Successfully: #{video.title} for #{video.tags}")
   presentation.update_attributes(:viddler_id => video.id, :viddler_url => video.url, :status => 'completed', :thumbnail => video.thumbnail_url, :length => video.length_seconds)
 
 rescue StandardError, Timeout::Error => e

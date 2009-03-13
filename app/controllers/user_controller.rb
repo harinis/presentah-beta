@@ -1,5 +1,7 @@
 class UserController < ApplicationController
   before_filter :get_viddler_instance, :only => [:presentation]
+  before_filter :redirect_to_home_if_not_logged_in, :only => [:post_presentation, :review_presentations, :presentation, :rate_presentation,
+           :forgot_password, :search, :sign_out]
   def index
     @page_name = 'Home'
   end
@@ -83,6 +85,10 @@ class UserController < ApplicationController
   end
 
   private
+
+  def redirect_to_home_if_not_logged_in
+     flash[:access_denied] = "Please log in/sign-up to access this page" and redirect_to '/' if session[:user].nil?
+  end
 
   def get_viddler_instance
     @viddler = Viddler::Base.new(VIDDLER_API_KEY, VIDDLER_ADMIN_USERNAME, VIDDLER_ADMIN_PASSWORD)

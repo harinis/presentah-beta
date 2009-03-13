@@ -7,8 +7,7 @@
       <span><%= f.label :password, 'Password' %></span><%= f.password_field :password, :size => 25 %>
   </div>
   <div class="row remember_password">
-      <%= check_box_tag "remember" %>
-      <span>Remember Password</span><%= submit_tag 'Sign In', :class => 'submit' %>
+      <%= submit_tag 'Sign In', :class => 'submit' %>
   </div>
   <div class="row">
       <%= link_to "Forgot Password?", "/user/forgot_password", :id => "forgot_password" %>
