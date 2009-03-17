@@ -22,7 +22,7 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
-#   config.gem "viddler"
+   config.gem "disqus"
 #   config.gem "ruby-openid"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
@@ -71,4 +71,6 @@ Rails::Initializer.run do |config|
   VIDDLER_ADMIN_PASSWORD = 'sh@mad18'
   DISQUS_API_USER_KEY = '6npuDIJoYdFek1bBsSPnREGiXwDnwsm5yPQ1TvOOTDY9gAFAOqYpLaC6EGDwudjQ'
   DISQUS_API_FORUM_KEY = 'k2bLjK5NYrhQf0TObzPkUYEbHHiwVslemlyw1IhRuRSYUTucpw4x0uMaXHrEMM9f'
+#  Disqus::DEFAULTS[:account] = "harinis"
+#  Disqus::DEFAULTS[:api_key] = "6npuDIJoYdFek1bBsSPnREGiXwDnwsm5yPQ1TvOOTDY9gAFAOqYpLaC6EGDwudjQ"
 end

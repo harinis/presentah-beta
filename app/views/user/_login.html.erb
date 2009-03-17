@@ -1,27 +1,30 @@
 <h4>Sign-in | <%= link_to "Create Account", create_account_path %></h4>
 <% form_for :user, {:url => login_path} do |f| %>
-  <div class="row">
-      <span><%= f.label :username, 'Email' %></span> <%= f.text_field :username, :size => 25, :id => "email" %>
-  </div>
-  <div class="row">
-      <span><%= f.label :password, 'Password' %></span><%= f.password_field :password, :size => 25 %>
-  </div>
-  <div class="row remember_password">
-      <%= submit_tag 'Sign In', :class => 'submit' %>
-  </div>
-  <div class="row">
-      <%= link_to "Forgot Password?", "/user/forgot_password", :id => "forgot_password" %>
-  </div>
-  <div class="error"><%= flash[:notice] %></div>
+    <div class="row">
+        <span><%= f.label :username, 'Email' %></span> <%= f.text_field :username, :size => 25, :id => "email" %>
+    </div>
+    <div class="row">
+        <span><%= f.label :password, 'Password' %></span><%= f.password_field :password, :size => 25 %>
+    </div>
+    <div class="row remember_password">
+        <%= submit_tag 'Sign In', :class => 'submit' %>
+    </div>
+    <div class="row">
+        <%= link_to "Forgot Password?", "/user/forgot_password", :id => "forgot_password" %>
+    </div>
+    <div><span class="error"><%= flash[:notice] %></span></div>
 <% end %>
 <script type="text/javascript">
     $("#forgot_password").click(function() {
-      var email_id = $("#email").val();
-      if (email_id == null) {
-        $('forgot_password_error').val('Please enter the email address you used to register on presentah');
-      } else {
-        $.get('/user/forgot_password', {email: email_id});
-      }
-      return false;
+        var email_id = $("#email").val();
+        alert(email_id);
+        if (email_id == null || email_id == "") {
+            $('.error').text('Please enter the email address you used to register on presentah');
+        } else {
+            $.get('/user/forgot_password', {email: email_id}, function(response) {
+                $(".error").text(response);
+            });
+        }
+        return false;
     });
 </script>

@@ -4,21 +4,19 @@
         <div><span>Title : </span><%= @presentation.title %></div>
         <div><span>Description : </span><%= @presentation.description %></div>
         <% unless @presentation.purpose.blank? %>
-          <div><span>Purpose : </span><%= @presentation.purpose %></div>
+            <div><span>Purpose : </span><%= @presentation.purpose %></div>
         <% end %>
     </div>
 </div>
 
-<div id="rate"><%= render :partial => 'rating' %></div>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_identifier = "<%= @presentation.id%>";
-    var disqus_title = "<%= @presentation.title%>";
-    var disqus_url = "<%= "http://presentah.disqus.com/#{@presentation.title}/"%>";
-    var disqus_developer = 1;
-</script>
-
-<script type="text/javascript" src="http://disqus.com/forums/presentah/embed.js"></script>
-<noscript><a href="http://presentah.disqus.com/?url=ref">View the discussion thread.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-
+<div class="js-kit-rating" path="presentation<%= @presentation.id%>/criteria/slides" title="slides of <%= @presentation.title %> presentation"
+     view="combo"></div>
+<div class="js-kit-rating" path="presentation<%= @presentation.id%>/criteria/body_language" title="body language of <%= @presentation.title %> presenter"
+     view="combo"></div>
+<div class="js-kit-rating" path="presentation<%= @presentation.id%>/criteria/voice" title="voice of the presenter of <%= @presentation.title %> presentation"
+     view="combo"></div>
+<div class="js-kit-rating" path="presentation<%= @presentation.id%>/criteria/message" title="message conveyed in <%= @presentation.title %> presentation"
+     view="combo"></div>
+<script src="http://js-kit.com/ratings.js"></script>
+<div class="js-kit-comments" permalink="http://pitchreview.com/presentation/<%= @presentation.id%>"></div>
+<script src="http://js-kit.com/comments.js"></script>

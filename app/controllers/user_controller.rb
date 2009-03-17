@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   before_filter :get_viddler_instance, :only => [:presentation]
   before_filter :redirect_to_home_if_not_logged_in, :only => [:post_presentation, :review_presentations, :presentation, :rate_presentation,
-           :forgot_password, :search, :sign_out]
+           :search, :sign_out]
   def index
     @page_name = 'Home'
   end
@@ -71,8 +71,7 @@ class UserController < ApplicationController
   def forgot_password
     user = User.find_by_username(params[:email])
     Mailer.deliver_forgot_password(user.username, user.password)
-    flash[:notice] = "An email has been sent to #{user.username} with your password!"
-    redirect_to :action => 'sign_in'
+    render :text => "An email has been sent to #{user.username} with your password!"
   end
 
   def search
@@ -110,5 +109,4 @@ class UserController < ApplicationController
       @user_rating[criteria] = session[:user].rating_for(@presentation, criteria)
     end
   end
-
 end

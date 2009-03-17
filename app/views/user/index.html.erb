@@ -1,7 +1,7 @@
 <div id="post_or_review">
     <div id="how_to">
         <%= link_to "How it Works", '#' %>
-    </div>    
+    </div>
     <div><%= link_to '1 Review your Presentation', '/user/review_presentations' %></div>
     <div><%= link_to '2 Post your Presentation', post_presentation_path %></div>
     <div><%= link_to '3 Invite Feedback', '#' %></div>
@@ -11,17 +11,3 @@
     <%= flash[:access_denied] %>
     <%= render :partial => 'login' %>
 </div>
-
-<% if @top_presentations %>
-  <div id="top_presentations">
-      <span>Top Presentations</span>
-      <table>
-          <tr>
-              <% @top_presentations.each do |presentation| %>
-                <td><%= link_to (image_tag presentation.thumbnail || "", :alt => presentation.title, :height => 160, :width => 160), "/user/presentation/#{presentation.id}" %></td>
-              <% end %>
-          </tr>
-      </table>
-  </div>
-<% end %>
-
